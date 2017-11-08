@@ -32,5 +32,9 @@ class InvitationsServiceProvider extends ServiceProvider {
             return new Jameron\Invitations\Invitation;
         });
 
+        $this->app->bind('App\User', function ($app) {
+            return new App\User();
+        });
+
     }
 }
