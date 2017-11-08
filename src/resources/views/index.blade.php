@@ -21,7 +21,7 @@
                                         'th' => 'Email', 
                                         'column' => 'email' 
                                     ])
-                                    @include('admin:partials.utils._sortable_column', 
+                                    @include('admin::partials.utils._sortable_column', 
                                     [
                                         'th' => 'Token', 
                                         'column' => 'token' 
