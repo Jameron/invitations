@@ -6,32 +6,32 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Invitations Index Page</div>
                     <div class="panel-body">
-                        @include('theme::partials.utils._success')
+                        @include('admin::partials.utils._success')
                         <a href="{{ url('/admin/invitations/create') }}" class="btn btn-primary">Create</a>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    @include('theme::partials.utils._sortable_column', 
+                                    @include('admin::partials.utils._sortable_column', 
                                     [
                                         'th' => 'Name', 
                                         'column' => 'name' 
                                     ])
-                                    @include('theme::partials.utils._sortable_column', 
+                                    @include('admin::partials.utils._sortable_column', 
                                     [
                                         'th' => 'Email', 
                                         'column' => 'email' 
                                     ])
-                                    @include('theme::partials.utils._sortable_column', 
+                                    @include('admin:partials.utils._sortable_column', 
                                     [
                                         'th' => 'Token', 
                                         'column' => 'token' 
                                     ])
-                                    @include('theme::partials.utils._sortable_column', 
+                                    @include('admin::partials.utils._sortable_column', 
                                     [
                                         'th' => 'Sent at', 
                                         'column' => 'sent_at' 
                                     ])
-                                    @include('theme::partials.utils._sortable_column', 
+                                    @include('admin::partials.utils._sortable_column', 
                                     [
                                         'th' => 'Status', 
                                         'column' => 'status' 
