@@ -72,7 +72,7 @@ class InvitationRegisterController extends LaravelRegisterController
 
         if ($invitation) {
 
-            $user = $this->app->make('App\User');
+            $user = resolve('App\User');
             $user = User::create([
                 'name' => $invitation->name,
                 'email' => $invitation->email,
