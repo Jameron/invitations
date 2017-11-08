@@ -1,6 +1,6 @@
 {
     "name": "jameron/invitations",
-    "description": "Email invitations for bringing on new users",
+    "description": "Email invitations for bringing on new users to your applications.",
     "keywords": ["email", "invitations"],
     "homepage": "http://bydaylight.com",
     "license": "proprietary",
