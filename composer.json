@@ -2,8 +2,8 @@
     "name": "jameron/invitations",
     "description": "Email invitations for bringing on new users to your applications.",
     "keywords": ["email", "invitations"],
-    "homepage": "http://bydaylight.com",
-    "license": "proprietary",
+    "homepage": "http://cjmacfarlane.com",
+    "license": "MIT",
     "type": "project",
     "authors": [
         {
