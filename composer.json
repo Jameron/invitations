@@ -1,0 +1,36 @@
+{
+    "name": "jameron/invitations",
+    "description": "Email invitations for bringing on new users",
+    "keywords": ["email", "invitations"],
+    "homepage": "http://bydaylight.com",
+    "license": "proprietary",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Cameron Macfarlane",
+            "email": "cammac1984@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Jameron\\": "src/"}
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/InvitationsTest.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jameron\\Invitations\\InvitationsServiceProvider"
+            ],
+            "aliases": {
+                "Invitations": "Jameron\\Invitations\\Facades\\Facade"
+            }
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
