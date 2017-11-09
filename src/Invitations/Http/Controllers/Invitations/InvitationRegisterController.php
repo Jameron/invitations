@@ -86,7 +86,7 @@ class InvitationRegisterController extends LaravelRegisterController
             }
 
             $invitation->delete();
-            $this->claimed($user);
+            $this->claimed();
             
             $this->redirectTo = $user->roles()->first()->slug;
             return $user;
@@ -94,7 +94,7 @@ class InvitationRegisterController extends LaravelRegisterController
         }
     }
 
-    protected function claimed(User $user)
+    protected function claimed()
     {
         // do something with the user object after the token has been claimed
     }
