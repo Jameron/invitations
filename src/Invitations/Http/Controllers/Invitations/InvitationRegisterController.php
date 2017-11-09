@@ -67,7 +67,7 @@ class InvitationRegisterController extends LaravelRegisterController
     {
 
         $invitation = Invitation::where('token', $data['invitation_token'])
-            with('roles')
+            ->with('roles')
             ->first();
 
         if ($invitation) {
