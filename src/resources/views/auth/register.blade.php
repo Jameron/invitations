@@ -1,4 +1,4 @@
-@extends('theme::layouts.student')
+@extends('admin::layouts.student')
 @section('content')
 <div class="container">
     <div class="row">
