@@ -85,8 +85,8 @@ class InvitationRegisterController extends LaravelRegisterController
 
             }
 
-            $invitation->delete($user);
-            $this->claimed();
+            $invitation->delete();
+            $this->claimed($user);
             
             $this->redirectTo = $user->roles()->first()->slug;
             return $user;
