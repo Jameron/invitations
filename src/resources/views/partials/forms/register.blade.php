@@ -27,8 +27,9 @@
 </div>
 <div class="form-group">
     <label for="password-confirm">Confirm Password</label>
-        <input id="password-confirm" type="password" class="form-control @if(config('admin.theme')=='dark')form-control-dark @endif" name="password_confirmation" required>
-    </div>
+    <input id="password-confirm" type="password" class="form-control @if(config('admin.theme')=='dark')form-control-dark @endif" name="password_confirmation" required>
+</div>
+<input type="hidden" name="invitation_token" value="{{ $invitation->token }}">
 <div class="form-group">
     <button type="submit" class="btn btn-primary">
         Register
