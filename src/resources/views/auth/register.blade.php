@@ -1,11 +1,15 @@
 @extends('admin::layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-5 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <div class="card text-center" style="margin-top: 10rem;">
+                <h4 class="card-header">
+                    Complete Account Setup
+                </h4>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
                     @include('admin::partials.utils._success')
                     <form class="form-horizontal" action="{{ url('invitations/register') }}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
