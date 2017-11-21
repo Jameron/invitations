@@ -1,11 +1,15 @@
 @extends('admin::layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Invitations Index Page</div>
-                    <div class="panel-body">
+<div class="container">
+    <div class="row justify-content-md-left">
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card" style="margin-top: 1rem;">
+                <h4 class="card-header">
+                    Invitations
+                </h4>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
                         @include('admin::partials.utils._success')
                         <a href="{{ url('/admin/invitations/create') }}" class="btn btn-primary">Create</a>
                         <table class="table table-hover">

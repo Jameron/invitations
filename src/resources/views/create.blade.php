@@ -1,11 +1,15 @@
 @extends('admin::layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-5 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Create Invitation</div>
-                <div class="panel-body">
+    <div class="row justify-content-md-left">
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card" style="margin-top: 1rem;">
+                <h4 class="card-header">
+                    Create Invitation
+                </h4>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
                     @include('admin::partials.utils._success')
                     <form action="/admin/invitations" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
