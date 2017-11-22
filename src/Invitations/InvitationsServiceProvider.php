@@ -34,7 +34,7 @@ class InvitationsServiceProvider extends ServiceProvider {
         });
 
         $this->app->bind('App\User', function ($app) {
-            $model = config('invitations.user_model');
+            $model = config('invitations.user.model');
             return new $model;
         });
 

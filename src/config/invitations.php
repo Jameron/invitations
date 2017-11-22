@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'user_model' => \App\User::class,
+    'user' => [
+        'model' => \App\User::class,
+    ],
     'from' => 'noreply@example.com',
     'expires_at' => null, // number of days
     'related' => [
@@ -9,6 +11,7 @@ return [
         'model' => \App\ExampleModel::class,
         'title' => 'Example'
         'id_column' => 'id',
-        'value_column' => 'name'
+        'value_column' => 'name',
+        'user_foreign_key' => 'user_id'
     ]
 ];

@@ -79,6 +79,10 @@ class InvitationRegisterController extends LaravelRegisterController
                 'password' => bcrypt($data['password']),
             ]);
 
+            if(Config('invitations.related.active')) {
+                $user->{config('invitations.related.user_foreign_key')} = $invitation->invitable_id; 
+            }
+
             foreach($invitation->roles as $role) {
 
                 $user->assignRole($role->slug);
