@@ -34,11 +34,13 @@ class InvitationsServiceProvider extends ServiceProvider {
         });
 
         $this->app->bind('App\User', function ($app) {
-            return new \App\User();
+            $model = config('invitations.user_model');
+            return new $model;
         });
 
         $this->app->bind('App\Invitable', function ($app) {
-            return new \App\YourInvitableModel();
+            $model = config('invitations.related.model');
+            return new $model;
         });
 
     }

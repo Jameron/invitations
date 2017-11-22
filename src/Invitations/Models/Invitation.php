@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Jameron\Invitations\Models\Traits\Invitable;
 
 class Invitation extends Model {
 
-    use Invitable;
 
     protected $table = 'invitations';
 

@@ -25,9 +25,11 @@ NOTE: Laravel 5.5 users can skip steps 2 and 3
 
 ```php
 
-    'related_model' => [
-        'use_related' => true,
-        'related_model' => App/YourModel::class
+    'related' => [
+        'active' => false,
+        'model' => \App\ExampleModel::class,
+        'id_column' => 'id',
+        'value_column' => 'name'
     ]
 ```
 

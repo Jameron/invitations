@@ -1,6 +1,8 @@
 <?php namespace Jameron\Invitations\Models\Traits;
 
-trait InvitableTrait {
+use Jameron\Invitations\Models\Invitation;
+
+trait Invitable {
 
 	/**
 	 * Returns a collection of TermRelation model objects. These models create 
@@ -10,7 +12,7 @@ trait InvitableTrait {
 	 */
 	public function invitations() 
 	{
-        return $this->morphMany('Jameron\Models\Invitation', 'invitable');
+        return $this->morphMany('Jameron\Invitations\Models\Invitation', 'invitable');
     }	
 
 	/**

@@ -3,6 +3,7 @@
 namespace Jameron\Invitations\Http\Controllers\Invitations;
 
 use Mail;
+use Config;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Jameron\Regulator\Models\Role;
@@ -81,9 +82,20 @@ class InvitationsController extends Controller
      */
     public function create()
     {
+        $data = [];
+
         $roles = Role::all();
 
-        return view('invitations::create', compact('roles'));
+        $data['roles'] = $roles;
+
+        if(Config::get('invitations.related')) {
+            $invitables = resolve('App\Invitable');
+            $invitables = $invitables->pluck(Config::get('invitations.related.value_column'), Config::get('invitations.id_column'));
+            $data['invitables'] = $invitables;
+        }
+
+        return view('invitations::create')
+            ->with($data);
     }
 
     /**
@@ -100,13 +112,14 @@ class InvitationsController extends Controller
         $invitation->email = ($request->email);
         $invitation->token = ($request->token);
         $invitation->expires_at = ($request->expires_at);
-        $invitation->save();
 
         if(Config('invitations.related.active') && $request->get('related')) {
             $invitable_model = resolve('App\Invitable');
-            $invitable_model->find($request->get('related'));
-            $invitation->addModel($invitable_model);
+            $invitable_model_id = (integer)$request->get('related');
+            $invitable_model = $invitable_model->find($invitable_model_id);
+            $invitable_model->relate($invitation);
         }
+        $invitation->save();
         
         // If there are no roles then create an empty array
         $request->roles = ($request->roles) ? $request->roles : [];
