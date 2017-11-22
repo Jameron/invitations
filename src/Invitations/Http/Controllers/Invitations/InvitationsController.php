@@ -101,7 +101,13 @@ class InvitationsController extends Controller
         $invitation->token = ($request->token);
         $invitation->expires_at = ($request->expires_at);
         $invitation->save();
-        //
+
+        if(Config('invitations.related.active') && $request->get('related')) {
+            $invitable_model = resolve('App\Invitable');
+            $invitable_model->find($request->get('related'));
+            $invitation->addModel($invitable_model);
+        }
+        
         // If there are no roles then create an empty array
         $request->roles = ($request->roles) ? $request->roles : [];
         $invitation->roles()->sync($request->roles);

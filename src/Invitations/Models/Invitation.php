@@ -1,10 +1,12 @@
 <?php namespace Jameron\Invitations\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jameron\Invitations\Models\Traits\Invitable;
 
 class Invitation extends Model {
+
+    use Invitable;
 
     protected $table = 'invitations';
 
@@ -12,4 +14,9 @@ class Invitation extends Model {
 	{
 		return $this->belongsToMany('Jameron\Regulator\Models\Role', 'invitations_role_user');
 	}
+
+  	public function invitable()
+    {
+    	return $this->morphTo();
+    }
 }

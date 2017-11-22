@@ -20,3 +20,23 @@ NOTE: Laravel 5.5 users can skip steps 2 and 3
 5) Run migrations
 
     ```pph artisan migrate```
+
+6) If you want to tie related model data to your invitations you can set that in your config/invitations.php config file.
+
+```php
+
+    'related_model' => [
+        'use_related' => true,
+        'related_model' => App/YourModel::class
+    ]
+```
+
+Make sure to add this to the model you are relating to your invitations:
+
+```php
+use Jameron/Invitations/Models/Traits/Invitable;
+```
+
+then in the class add that Trait
+
+use Invitable;

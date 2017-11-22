@@ -37,5 +37,9 @@ class InvitationsServiceProvider extends ServiceProvider {
             return new \App\User();
         });
 
+        $this->app->bind('App\Invitable', function ($app) {
+            return new \App\YourInvitableModel();
+        });
+
     }
 }
