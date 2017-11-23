@@ -90,7 +90,7 @@ class InvitationsController extends Controller
 
         if(Config::get('invitations.related')) {
             $invitables = resolve('App\Invitable');
-            $invitables = $invitables->pluck(Config::get('invitations.related.value_column'), Config::get('invitations.id_column'));
+            $invitables = $invitables->pluck(Config::get('invitations.related.value_column'), Config::get('invitations.related.id_column'));
             $data['invitables'] = $invitables;
         }
 

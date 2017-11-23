@@ -9,7 +9,7 @@ return [
     'related' => [
         'active' => false,
         'model' => \App\ExampleModel::class,
-        'title' => 'Example'
+        'title' => 'Example',
         'id_column' => 'id',
         'value_column' => 'name',
         'user_foreign_key' => 'user_id'

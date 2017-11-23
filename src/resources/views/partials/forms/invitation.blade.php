@@ -26,12 +26,15 @@
 </div>
 @endif
 @if(Config::get('invitations.related'))
-    <select name="related">
+<div class="form-group">
+    <select name="related" class="form-control">
         <option>Select related {{ Config::get('related.title') }}</option>
         @foreach($invitables as $id => $invitable)
             <option value="{{ $id }}">{{ $invitable }}</option>
         @endforeach
-    @endif
+    </select>
+</div>
+@endif
 <p class="button-group">
     <button type="submit" class="btn btn-primary">Save</button>
 	<a href="{{ url('admin/invitations') }}" class="btn-alt">Cancel</a>

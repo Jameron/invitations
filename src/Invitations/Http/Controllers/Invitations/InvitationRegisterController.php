@@ -80,7 +80,11 @@ class InvitationRegisterController extends LaravelRegisterController
             ]);
 
             if(Config('invitations.related.active')) {
-                $user->{config('invitations.related.user_foreign_key')} = $invitation->invitable_id; 
+
+                $invitable = resolve('App\Invitable');
+                $invitable = $invitable->find($invitation->invitable_id);
+                $invitable->{config('invitations.related.user_foreign_key')} = $user->id; 
+                $invitable->save();
             }
 
             foreach($invitation->roles as $role) {
