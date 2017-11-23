@@ -18,8 +18,10 @@ class CreateInvitationsTable extends Migration
             $table->string('token')->unique();
             $table->timestamp('sent_at')->nullable();
             $table->timestamp('expires_at')->nullable();
-            $table->integer('invitable_id')->unsigned(); // Id of the related model like product_id, or other thing_id
-            $table->string('invitable_type'); // Class name of the owning model so Products, or Things
+            if(config('invitations.related.active')) {
+                $table->integer('invitable_id')->unsigned(); // Id of the related model like product_id, or other thing_id
+                $table->string('invitable_type'); // Class name of the owning model so Products, or Things
+            }
             $table->timestamps();
         });
     }
