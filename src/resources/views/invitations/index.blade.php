@@ -11,7 +11,7 @@
                     <h5 class="card-title"></h5>
                     <p class="card-text"></p>
                         @include('admin::partials.utils._success')
-                        <a href="{{ url('/admin/invitations/create') }}" class="btn btn-primary">Create</a>
+                        <a href="{{ url(config('invitations.route') . '/create') }}" class="btn btn-primary">Create</a>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
