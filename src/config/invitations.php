@@ -13,5 +13,6 @@ return [
         'id_column' => 'id',
         'value_column' => 'name',
         'user_foreign_key' => 'user_id'
-    ]
+	],
+	'route' => 'admin/invitations'
 ];

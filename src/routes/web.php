@@ -1,8 +1,8 @@
 <?php 
 
 Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
-	Route::resource('admin/invitations', 'Jameron\Invitations\Http\Controllers\Invitations\InvitationsController');
-	Route::post('admin/invitations/{id}/resend', 'Jameron\Invitations\Http\Controllers\Invitations\InvitationsController@resendInvitation');
+	Route::resource(config('invitations.route'), 'Jameron\Invitations\Http\Controllers\Invitations\InvitationsController');
+	Route::post(config('invitations.route') . '/{id}/resend', 'Jameron\Invitations\Http\Controllers\Invitations\InvitationsController@resendInvitation');
 });
 
 Route::group(['middleware' => ['web','guest']], function () {
