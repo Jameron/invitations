@@ -58,13 +58,13 @@
                                         </td>
                                         <td>{!! ucfirst(strtolower($invitation->status)) !!}</td>
                                         <td>
-                                            <form method="POST" action="{{ url('admin/invitations/' . $invitation->id . '/resend') }}" onsubmit='return confirm("Are you sure you want to resend this invitation?");'>
+                                            <form method="POST" action="{{ url(config('invitations.route') . '/' . $invitation->id . '/resend') }}" onsubmit='return confirm("Are you sure you want to resend this invitation?");'>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="btn btn-link"><span>Resend Invitation</span></button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="POST" action="{{ url('admin/invitations/' . $invitation->id) }}" onsubmit='return confirm("Are you sure you want to delete this invitation?");'>
+                                            <form method="POST" action="{{ url(config('invitations.route') . '/' . $invitation->id) }}" onsubmit='return confirm("Are you sure you want to delete this invitation?");'>
                                                 <input type="hidden" name="_method" value="DELETE"> 
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="btn btn-link"><span>Delete</span></button>
