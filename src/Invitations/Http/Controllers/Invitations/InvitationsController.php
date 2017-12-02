@@ -134,7 +134,7 @@ class InvitationsController extends Controller
                                 $invitation->save();
                             }));
 
-        return redirect(config('invitations.route')
+        return redirect(config('invitations.route'))
             ->with('success_message', 'Invitation created successfully.');
     }
 
