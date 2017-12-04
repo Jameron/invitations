@@ -61,7 +61,7 @@
                                         </td>
                                         @if(config('invitations.related.active'))
                                         <td>
-                                            <a href="{{ $invitation->invitable->{config('invitations.related.id_column')} }}">
+                                            <a href="{{ config('invitations.related.resource_route') . '/' . $invitation->invitable->{config('invitations.related.id_column')} }}">
                                                 {!! ucfirst(strtolower($invitation->invitable->{config('invitations.related.value_column')})) !!}
                                             </a>
                                         </td>
