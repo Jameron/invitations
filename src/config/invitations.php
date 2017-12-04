@@ -15,5 +15,5 @@ return [
         'value_column' => 'name',
         'user_foreign_key' => 'user_id'
 	],
-	'route' => 'admin/invitations' // leave off trailing slash
+	'route' => '/admin/invitations' // leave off trailing slash
 ];
