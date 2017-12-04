@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use Jameron\Regulator\Models\Role;
 use App\Http\Controllers\Controller;
 use Jameron\Invitations\Models\Invitation;
-use Jameron\Invitations\Mail\Invitation as InvitationMail;
 use Jameron\Enrollments\Http\Requests\InvitationRequest;
+use Jameron\Invitations\Mail\Invitation as InvitationMail;
 
 class InvitationsController extends Controller
 {
@@ -43,6 +43,7 @@ class InvitationsController extends Controller
                     ->orderBy('invitations.email', $order)
                     ->select('invitations.*')
                     ->paginate(20);
+
             break;
         case 'role':
 

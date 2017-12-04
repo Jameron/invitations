@@ -13,7 +13,8 @@ class CreateInvitationsTable extends Migration
             $table->string('message_id')->nullable();
             $table->enum('status', ['pending','delivery','bounce','complaint'])
                 ->default('pending');
-            $table->string('name')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('token')->unique();
             $table->timestamp('sent_at')->nullable();

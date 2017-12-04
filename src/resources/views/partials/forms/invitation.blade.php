@@ -1,10 +1,14 @@
 <div class="form-group">
-    <label>Name: *</label>
-    <input type="text" class="form-control" name="name" value="@if(isset($invitation)){{$invitation->name}}@endif">
+    <label for="firstName">First name: *</label>
+    <input type="text" class="form-control" name="first_name" value="@if(isset($invitation)){{$invitation->first_name}}@endif" id="firstName">
 </div>
 <div class="form-group">
-    <label>Email: *</label>
-    <input type="text" class="form-control" name="email" value="@if(isset($invitation)){{$invitation->email}}@endif">
+    <label for="lastName">Last name: *</label>
+    <input type="text" class="form-control" name="last_name" value="@if(isset($invitation)){{$invitation->last_name}}@endif" id="lastName">
+</div>
+<div class="form-group">
+    <label for="email">Email: *</label>
+    <input type="text" class="form-control" name="email" value="@if(isset($invitation)){{$invitation->email}}@endif" id="email">
 </div>
 @if(isset($roles))
 <div class="form-group">

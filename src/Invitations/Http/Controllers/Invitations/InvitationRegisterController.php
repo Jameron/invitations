@@ -74,7 +74,8 @@ class InvitationRegisterController extends LaravelRegisterController
 
             $user = resolve('App\User');
             $user = $user->create([
-                'name' => $invitation->name,
+                'first_name' => $invitation->first_name,
+                'last_name' => $invitation->last_name,
                 'email' => $invitation->email,
                 'password' => bcrypt($data['password']),
             ]);
