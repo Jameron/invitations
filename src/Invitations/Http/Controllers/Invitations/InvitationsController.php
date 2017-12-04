@@ -134,7 +134,7 @@ class InvitationsController extends Controller
                                 $invitation->save();
                             }));
 
-        return redirect('/admin/invitations')
+        return redirect(config('invitations.route'))
             ->with('success_message', 'Invitation created successfully.');
     }
 
@@ -182,7 +182,7 @@ class InvitationsController extends Controller
         $request->roles = ($request->roles) ? $request->roles : [];
         $invitation->roles()->sync($request->roles);
 
-        return redirect('/admin/invitations')
+        return redirect(config('invitations.route'))
             ->with('success_message', 'Updated');
     }
 
@@ -197,7 +197,7 @@ class InvitationsController extends Controller
         $invitation = Invitation::findOrFail($id);
         $invitation->delete();
 
-        return redirect()->to('admin/invitations')->with('success_message', $invitation->email . ' was deleted.');
+        return redirect()->to(config('invitations.route'))->with('success_message', $invitation->email . ' was deleted.');
 
     }
 
@@ -213,7 +213,7 @@ class InvitationsController extends Controller
                                 $invitation->save();
                             }));
 
-        return redirect('/admin/invitations')
+        return redirect(config('invitations.route'))
             ->with('success_message', 'Invitation was resent successfully.');
     }
 
