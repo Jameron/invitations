@@ -11,8 +11,8 @@
                     <h5 class="card-title"></h5>
                     <p class="card-text"></p>
                         @include('admin::partials.utils._success')
-                        <a href="{{ url('/admin/invitations/create') }}" class="btn btn-primary">Create</a>
-                        <table class="table table-hover">
+                        <a href="{{ url(config('invitations.route') . '/create') }}" class="btn btn-primary">Create</a>
+                        <table class="table table-hover table-responsive">
                             <thead>
                                 <tr>
                                     @include('admin::partials.utils._sortable_column', 
@@ -40,6 +40,9 @@
                                         'th' => 'Status', 
                                         'column' => 'status' 
                                     ])
+                                    @if(config('invitations.related.active'))
+                                    <th>Related Model</th>
+                                    @endif
                                     <th>Resend</th>
                                     <th>Delete</th>
                                 </tr>
@@ -56,15 +59,21 @@
                                         <td>
                                             {!! ($invitation->expires_at) ? date('M d, Y h:i a', strtotime($invitation->expires_at)) : '' !!}
                                         </td>
-                                        <td>{!! ucfirst(strtolower($invitation->status)) !!}</td>
+                                        @if(config('invitations.related.active'))
                                         <td>
-                                            <form method="POST" action="{{ url('admin/invitations/' . $invitation->id . '/resend') }}" onsubmit='return confirm("Are you sure you want to resend this invitation?");'>
+                                            <a href="{{ $invitation->invitable->{config('invitations.related.id_column')} }}">
+                                                {!! ucfirst(strtolower($invitation->invitable->{config('invitations.related.value_column')})) !!}
+                                            </a>
+                                        </td>
+                                        @endif
+                                        <td>
+                                            <form method="POST" action="{{ url(config('invitations.route') . '/' . $invitation->id . '/resend') }}" onsubmit='return confirm("Are you sure you want to resend this invitation?");'>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="btn btn-link"><span>Resend Invitation</span></button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="POST" action="{{ url('admin/invitations/' . $invitation->id) }}" onsubmit='return confirm("Are you sure you want to delete this invitation?");'>
+                                            <form method="POST" action="{{ url(config('invitations.route') . '/' . $invitation->id) }}" onsubmit='return confirm("Are you sure you want to delete this invitation?");'>
                                                 <input type="hidden" name="_method" value="DELETE"> 
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button type="submit" class="btn btn-link"><span>Delete</span></button>
