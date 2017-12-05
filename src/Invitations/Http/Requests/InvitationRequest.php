@@ -23,6 +23,7 @@ class InvitationRequest extends FormRequest {
 
 	public function rules()
 	{
+        $id = $this->route('invitation');
 		switch($this->method())
    	 	{
 			case 'GET':
@@ -45,7 +46,7 @@ class InvitationRequest extends FormRequest {
 				return [
 					'first_name'  => 'required|min:1',
 					'last_name'  => 'required|min:1',
-					'email' => 'required|email|unique:users,email|unique:invitations,email,'.$this->id,
+					'email' => 'required|email|unique:users,email|unique:invitations,email,'.$id,
 					'roles' => 'required',
 				];
 			}

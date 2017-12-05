@@ -35,6 +35,13 @@
                                         'th' => 'Sent at', 
                                         'column' => 'sent_at' 
                                     ])
+                                    @if(config('invitations.expires'))
+                                    @include('admin::partials.utils._sortable_column', 
+                                    [
+                                        'th' => 'Expires at', 
+                                        'column' => 'expires_at' 
+                                    ])
+                                    @endif
                                     @include('admin::partials.utils._sortable_column', 
                                     [
                                         'th' => 'Status', 
@@ -43,6 +50,7 @@
                                     @if(config('invitations.related.active'))
                                     <th>Related Model</th>
                                     @endif
+                                    <th>Edit</th>
                                     <th>Resend</th>
                                     <th>Delete</th>
                                 </tr>
@@ -50,14 +58,19 @@
                             <tbody>
                                 @foreach($invitations as $invitation)
                                     <tr>
-                                        <td>{{ $invitation->name }}</td>
+                                        <td>{{ $invitation->first_name . ' ' . $invitation->last_name }}</td>
                                         <td>{{ $invitation->email }}</td>
                                         <td>{{ $invitation->token }}</td>
                                         <td>
                                             {!! ($invitation->sent_at) ? date('M d, Y h:i a', strtotime($invitation->sent_at)) : 'Not yet sent' !!}
                                         </td>
+                                        @if(config('invitations.expires'))
                                         <td>
                                             {!! ($invitation->expires_at) ? date('M d, Y h:i a', strtotime($invitation->expires_at)) : '' !!}
+                                        </td>
+                                        @endif
+                                        <td>
+                                            {!! $invitation->status !!}
                                         </td>
                                         @if(config('invitations.related.active'))
                                         <td>
@@ -66,6 +79,9 @@
                                             </a>
                                         </td>
                                         @endif
+                                        <td>
+                                            <a href="{!! config('invitations.route') . '/' . $invitation->id !!}/edit">Edit</a>
+                                        </td>
                                         <td>
                                             <form method="POST" action="{{ url(config('invitations.route') . '/' . $invitation->id . '/resend') }}" onsubmit='return confirm("Are you sure you want to resend this invitation?");'>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

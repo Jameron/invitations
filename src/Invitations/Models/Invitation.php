@@ -7,6 +7,7 @@ class Invitation extends Model {
 
 
     protected $table = 'invitations';
+    protected $dates = ['expires_at'];
 
 	public function roles()
 	{

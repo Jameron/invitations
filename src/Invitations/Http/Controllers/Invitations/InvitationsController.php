@@ -117,7 +117,7 @@ class InvitationsController extends Controller
         $invitation->last_name = $request->get('last_name');
         $invitation->email = ($request->email);
         $invitation->token = ($request->token);
-        $invitation->expires_at = ($request->expires_at);
+        $invitation->expires_at = ($request->get('days_until_expires')) ? Carbon::now()->addDays($request->get('days_until_expires')) : null;
 
         if(Config('invitations.related.active') && $request->get('related')) {
             $invitable_model = resolve('App\Invitable');
@@ -163,10 +163,32 @@ class InvitationsController extends Controller
      */
     public function edit($id)
     {
+        $data = [];
+        $roles = Role::all();
+        $data['roles'] = $roles;
         $invitation = Invitation::where('id', $id)
+            ->with('roles');
+
+        if(Config::get('invitations.related')) {
+            $invitation = $invitation
+                ->with('invitable');
+        }
+        $invitation = $invitation
             ->first();
 
-        return view('invitations::edit', compact('invitation'));
+        if(Config::get('invitations.related')) {
+            $invitables = resolve('App\Invitable');
+            if(config('invitations.related.owner_foreign_key')) {
+                $invitables = $invitables->where(config('invitations.related.owner_foreign_key'), Auth::user()->id);
+            }
+            $invitables = $invitables->pluck(Config::get('invitations.related.value_column'), Config::get('invitations.related.id_column'));
+            $data['invitables'] = $invitables;
+        }
+
+        $data['invitation'] = $invitation;
+
+        return view('invitations::edit')
+            ->with($data);
     }
 
     /**
@@ -183,7 +205,8 @@ class InvitationsController extends Controller
         $invitation->first_name = $request->get('first_name');
         $invitation->last_name = $request->get('last_name');
         $invitation->email = ($request->email);
-        $invitation->expires_at = ($request->expires_at);
+        $invitation->token = ($request->token);
+        $invitation->expires_at = ($request->get('days_until_expires')) ? Carbon::now()->addDays($request->get('days_until_expires')) : null;
         $invitation->save();
 
         $request->roles = ($request->roles) ? $request->roles : [];

@@ -5,7 +5,7 @@ return [
         'model' => \App\User::class,
     ],
     'from' => 'noreply@example.com',
-    'expires_at' => null, // number of days
+    'expires' => false,
     'related' => [
         'active' => false,
         'model' => \App\ExampleModel::class,
@@ -16,5 +16,5 @@ return [
         'user_foreign_key' => 'user_id',
         'owner_foreign_key' => null
 	],
-	'route' => '/admin/invitations' // leave off trailing slash
+	'route' => '/invitations'
 ];
