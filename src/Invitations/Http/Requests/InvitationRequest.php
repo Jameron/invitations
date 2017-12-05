@@ -33,7 +33,8 @@ class InvitationRequest extends FormRequest {
 			case 'POST':
 			{
 				return [
-					'name'  => 'required|min:1',
+					'first_name'  => 'required|min:1',
+					'last_name'  => 'required|min:1',
 					'email' => 'required|email|unique:invitations,email|unique:users,email',
 					'roles' => 'required',
 				];
@@ -42,7 +43,8 @@ class InvitationRequest extends FormRequest {
 			case 'PATCH':
 			{
 				return [
-					'name'  => 'required|min:1',
+					'first_name'  => 'required|min:1',
+					'last_name'  => 'required|min:1',
 					'email' => 'required|email|unique:users,email|unique:invitations,email,'.$this->id,
 					'roles' => 'required',
 				];
