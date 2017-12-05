@@ -2,6 +2,7 @@
 
 namespace Jameron\Invitations\Http\Controllers\Invitations;
 
+use Auth;
 use Mail;
 use Config;
 use Carbon\Carbon;
