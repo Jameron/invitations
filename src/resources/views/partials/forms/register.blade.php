@@ -1,9 +1,18 @@
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-    <label for="name">Name</label>
-        <input id="name" type="text" class="form-control @if(config('admin.theme')=='dark')form-control-dark @endif" name="name" value="{{ old('name') ? old('name') : $invitation->name }}" disabled>
-        @if ($errors->has('name'))
+<div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+    <label for="name">First name</label>
+        <input id="first_name" type="text" class="form-control @if(config('admin.theme')=='dark')form-control-dark @endif" name="first_name" value="{{ old('first_name') ? old('first_name') : $invitation->first_name }}" disabled>
+        @if ($errors->has('first_name'))
             <span class="help-block">
-                <strong>{{ $errors->first('name') }}</strong>
+                <strong>{{ $errors->first('first_name') }}</strong>
+            </span>
+        @endif
+</div>
+<div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+    <label for="name">Last name</label>
+        <input id="last_name" type="text" class="form-control @if(config('admin.theme')=='dark')form-control-dark @endif" name="last_name" value="{{ old('last_name') ? old('last_name') : $invitation->last_name }}" disabled>
+        @if ($errors->has('last_name'))
+            <span class="help-block">
+                <strong>{{ $errors->first('last_name') }}</strong>
             </span>
         @endif
 </div>
