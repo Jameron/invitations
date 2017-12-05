@@ -113,7 +113,8 @@ class InvitationsController extends Controller
     {
 
         $invitation = new Invitation();
-        $invitation->name = $request->get('name');
+        $invitation->first_name = $request->get('first_name');
+        $invitation->last_name = $request->get('last_name');
         $invitation->email = ($request->email);
         $invitation->token = ($request->token);
         $invitation->expires_at = ($request->expires_at);
@@ -179,7 +180,8 @@ class InvitationsController extends Controller
     {
         $invitation = Invitation::where('id', $id)
             ->firstOrFail();
-        $invitation->name = $request->get('name');
+        $invitation->first_name = $request->get('first_name');
+        $invitation->last_name = $request->get('last_name');
         $invitation->email = ($request->email);
         $invitation->expires_at = ($request->expires_at);
         $invitation->save();
