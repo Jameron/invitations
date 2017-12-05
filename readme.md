@@ -39,7 +39,9 @@ use Jameron/Invitations/Models/Traits/Invitable;
 
 then in the class add that Trait
 
+```php
 use Invitable;
+```
 
 If for example say you are inviting an user to manage a page you created for them. You have a table called pages, with foreign_key user_id currently set to null. You want the page user_id (nullable) set to the invited user once they claim their invite.
 
@@ -59,5 +61,3 @@ Your config would look like this:
 ```
 
 When the invitation is claimed the page associated to the invitation will be updated with the users id.
-
-
