@@ -7,7 +7,7 @@ This package is designed to enable web applications the feature of sending token
 
 1) Add the package to yuor composer.json file
 
-```"jameron/invitations" : "1.*"```
+```"jameron/invitations" : "*"```
 
 NOTE: Laravel 5.5 users can skip steps 2 and 3
 
