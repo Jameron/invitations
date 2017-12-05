@@ -1,7 +1,7 @@
 # Invitations
 ## Send email based invites to potential new users.
 
-This package is designed to enable web applications the feature of sending tokenized email invitations to potential new users. The invitation is a record on a invitations table, and once claimed is removed and a new user is added to the users table. This package was designed to work the the 
+This package is designed to enable web applications the feature of sending tokenized email invitations to potential new users. The invitation is a record on a invitations table, and once claimed is removed and a new user is added to the users table. This package was designed to work the the [Admin Package](https://github.com/jameron/admin)
 
 
 1) Add the package to yuor composer.json file
