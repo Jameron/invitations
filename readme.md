@@ -35,9 +35,13 @@ NOTE: Laravel 5.5 users can skip steps 2 and 3
     'related' => [
         'active' => false,
         'model' => \App\ExampleModel::class,
+        'resource_route' => '',
+        'title' => 'Example',
         'id_column' => 'id',
-        'value_column' => 'name'
-    ]
+        'value_column' => 'name',
+        'user_foreign_key' => 'user_id',
+        'owner_foreign_key' => null
+	],
 ```
 
 Make sure to add this to the model you are relating to your invitations:
