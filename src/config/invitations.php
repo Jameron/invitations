@@ -13,7 +13,8 @@ return [
         'title' => 'Example',
         'id_column' => 'id',
         'value_column' => 'name',
-        'user_foreign_key' => 'user_id'
+        'user_foreign_key' => 'user_id',
+        'owner_foreign_key' => null
 	],
 	'route' => '/admin/invitations' // leave off trailing slash
 ];

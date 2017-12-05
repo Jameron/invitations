@@ -91,6 +91,9 @@ class InvitationsController extends Controller
 
         if(Config::get('invitations.related')) {
             $invitables = resolve('App\Invitable');
+            if(config('invitations.related.owner_foreign_key')) {
+                $invitables = $invitables->where(config('invitations.related.owner_foreign_key'), Auth::user()->id);
+            }
             $invitables = $invitables->pluck(Config::get('invitations.related.value_column'), Config::get('invitations.related.id_column'));
             $data['invitables'] = $invitables;
         }
