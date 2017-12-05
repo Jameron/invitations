@@ -28,23 +28,10 @@ NOTE: Laravel 5.5 users can skip steps 2 and 3
 
     ```pph artisan migrate```
 
-6) If you want to tie related model data to your invitations you can set that in your config/invitations.php config file.
+6) If you want to tie related model data to your invitations you can set that in your config/invitations.php config file.  
 
-```php
 
-    'related' => [
-        'active' => false,
-        'model' => \App\ExampleModel::class,
-        'resource_route' => '',
-        'title' => 'Example',
-        'id_column' => 'id',
-        'value_column' => 'name',
-        'user_foreign_key' => 'user_id',
-        'owner_foreign_key' => null
-	],
-```
-
-Make sure to add this to the model you are relating to your invitations:
+Make sure to add the Invitable Trait to the model you are relating to your invitations:
 
 ```php
 use Jameron/Invitations/Models/Traits/Invitable;
@@ -53,3 +40,24 @@ use Jameron/Invitations/Models/Traits/Invitable;
 then in the class add that Trait
 
 use Invitable;
+
+If for example say you are inviting an user to manage a page you created for them. You have a table called pages, with foreign_key user_id currently set to null. You want the page user_id (nullable) set to the invited user once they claim their invite.
+
+Your config would look like this:
+```php
+
+    'related' => [
+        'active' => false,
+        'model' => \App\Page::class,
+        'resource_route' => 'pages',
+        'title' => 'Pages',
+        'id_column' => 'id',
+        'value_column' => 'title',
+        'user_foreign_key' => 'user_id',
+        'owner_foreign_key' => null
+	],
+```
+
+When the invitation is claimed the page associated to the invitation will be updated with the users id.
+
+
