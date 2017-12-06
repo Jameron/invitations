@@ -33,22 +33,40 @@ class InvitationRequest extends FormRequest {
         	}
 			case 'POST':
 			{
-				return [
+				$rules = [
 					'first_name'  => 'required|min:1',
 					'last_name'  => 'required|min:1',
 					'email' => 'required|email|unique:invitations,email|unique:users,email',
 					'roles' => 'required',
-				];
+                ];
+
+                if(config('invitations.related') {
+
+                    $rules[] = [
+                        'related' => 'required'
+                    ];
+
+                }
+
+                return $rules;
 			}
 			case 'PUT':
 			case 'PATCH':
 			{
-				return [
+				$rules = [
 					'first_name'  => 'required|min:1',
 					'last_name'  => 'required|min:1',
 					'email' => 'required|email|unique:users,email|unique:invitations,email,'.$id,
 					'roles' => 'required',
-				];
+                ];
+                if(config('invitations.related') {
+
+                    $rules[] = [
+                        'related' => 'required'
+                    ];
+
+                }
+                return $rules;
 			}
 			default: break;
 		}
