@@ -41,7 +41,7 @@
     <select name="related" class="form-control">
         <option>Select related {{ Config::get('invitations.related.title') }}</option>
         @foreach($invitables as $id => $invitable)
-            <option value="{{ $id }}" {{ ($invitation->invitable->id==$id) ? 'selected' : '' }}>{{ $invitable }}</option>
+            <option value="{{ $id }}" {{ ( isset($invitation) && $invitation->invitable->id==$id) ? 'selected' : '' }}>{{ $invitable }}</option>
         @endforeach
     </select>
 </div>
