@@ -1,14 +1,14 @@
 <div class="form-group">
     <label for="firstName">First name: *</label>
-    <input type="text" class="form-control" name="first_name" value="{{ (old('first_name')) ? old('first_name') : (isset($invitation)) ? $invitation->first_name : null }}" id="firstName">
+    <input type="text" class="form-control" name="first_name" value="{{ (old('first_name')) ? old('first_name') : ((isset($invitation) && $invitation) ? $invitation->first_name : '') }}" id="firstName">
 </div>
 <div class="form-group">
     <label for="lastName">Last name: *</label>
-    <input type="text" class="form-control" name="last_name" value="{{ (old('last_name')) ? old('last_name') : (isset($invitation)) ? $invitation->last_name : null }}" id="lastName">
+    <input type="text" class="form-control" name="last_name" value="{{ (old('last_name')) ? old('last_name') : ((isset($invitation) && $invitation) ? $invitation->last_name : '') }}" id="lastName">
 </div>
 <div class="form-group">
     <label for="email">Email: *</label>
-    <input type="text" class="form-control" name="email" value="{{ (old('email')) ? old('email') : (isset($invitation)) ? $invitation->email : null }}" id="email">
+    <input type="text" class="form-control" name="email" value="{{ (old('email')) ? old('email') : ((isset($invitation) && $invitation) ? $invitation->email : '') }}" id="email">
 </div>
 @if(isset($roles))
 <div class="form-group">
@@ -39,7 +39,7 @@
 <div class="form-group">
     <label for="email">{{ ucfirst(Config::get('invitations.related.title')) }} *</label>
     <select name="related" class="form-control">
-        <option>Select related {{ Config::get('invitations.related.title') }}</option>
+        <option value="">Select related {{ Config::get('invitations.related.title') }}</option>
         @foreach($invitables as $id => $invitable)
             <option value="{{ $id }}" {{ ( isset($invitation) && $invitation->invitable->id==$id) ? 'selected' : '' }}>{{ $invitable }}</option>
         @endforeach

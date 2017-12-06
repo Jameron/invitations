@@ -9,7 +9,8 @@ class InvitationRequest extends FormRequest {
 	public function messages()
 	{
 		return [
-			'email.unique' => 'The email has been used on either the users table, or the invitations table.',
+            'email.unique' => 'The email has been used on either the users table, or the invitations table.',
+            'related.required' => 'You must select a related option.'
 		];
 	}
 
@@ -33,19 +34,20 @@ class InvitationRequest extends FormRequest {
         	}
 			case 'POST':
 			{
-				$rules = [
-					'first_name'  => 'required|min:1',
-					'last_name'  => 'required|min:1',
-					'email' => 'required|email|unique:invitations,email|unique:users,email',
-					'roles' => 'required',
+                $rules = [
+                    'first_name'  => 'required|min:1',
+                    'last_name'  => 'required|min:1',
+                    'email' => 'required|email|unique:invitations,email|unique:users,email'
                 ];
 
-                if(config('invitations.related') {
+                if(file_exists(base_path() . '/vendor/jameron/regulator/')) {
+                    $rules['roles'] = 'required';
+                }
 
-                    $rules[] = [
-                        'related' => 'required'
-                    ];
-
+                if(file_exists(base_path() . '/vendor/jameron/invitations/')) {
+                    if(config('invitations.related.active')) {
+                        $rules['related'] = 'required';
+                    }
                 }
 
                 return $rules;
@@ -56,16 +58,19 @@ class InvitationRequest extends FormRequest {
 				$rules = [
 					'first_name'  => 'required|min:1',
 					'last_name'  => 'required|min:1',
-					'email' => 'required|email|unique:users,email|unique:invitations,email,'.$id,
-					'roles' => 'required',
+					'email' => 'required|email|unique:users,email|unique:invitations,email,'.$id
                 ];
-                if(config('invitations.related') {
 
-                    $rules[] = [
-                        'related' => 'required'
-                    ];
-
+                if(file_exists(base_path() . '/vendor/jameron/regulator/')) {
+                    $rules['roles'] = 'required';
                 }
+
+                if(file_exists(base_path() . '/vendor/jameron/invitations/')) {
+                    if(config('invitations.related.active')) {
+                        $rules['related'] = 'required';
+                    }
+                }
+
                 return $rules;
 			}
 			default: break;
