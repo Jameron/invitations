@@ -1,6 +1,6 @@
 @extends('admin::layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
     <div class="row justify-content-md-left">
         <div class="col-12 col-md-12 col-lg-12">
             <div class="card" style="margin-top: 1rem;">
