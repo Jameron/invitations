@@ -14,7 +14,10 @@ return [
         'id_column' => 'id',
         'value_column' => 'name',
         'user_foreign_key' => 'user_id',
-        'owner_foreign_key' => null
+        'owner_foreign_key' => null,
+        'restrict_roles' => [
+           'installer' 
+        ]
 	],
 	'route' => '/invitations'
 ];
