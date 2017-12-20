@@ -18,4 +18,9 @@ class Invitation extends Model {
     {
     	return $this->morphTo();
     }
+
+    public function getRelatedAttribute()
+    {
+        return $this->invitable->{config('invitations.related.value_column')};
+    }
 }

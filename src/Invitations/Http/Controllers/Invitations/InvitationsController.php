@@ -39,11 +39,11 @@ class InvitationsController extends Controller
                     'label' => 'Email',
                 ],
                 [
-                    'column' => 'related_model',
+                    'column' => 'related', 
                     'label' => 'Related Model',
                     'link'=>[
-                        'id_column' => 'id',
-                        'resource_route'=>'users'
+                        'id_column' => config('invitations.related.id_column'),
+                        'resource_route'=> config('invitations.related.resource_route')
                     ]
                 ],
                 [
@@ -141,7 +141,7 @@ class InvitationsController extends Controller
 
         } else {
 
-           return $invitations = $invitations        
+            $invitations = $invitations        
                 ->select('invitations.*')
                 ->orderBy('invitations.email', $order)
                 ->paginate(20);
@@ -300,7 +300,7 @@ class InvitationsController extends Controller
         $request->roles = ($request->roles) ? $request->roles : [];
         $invitation->roles()->sync($request->roles);
 
-        return redirect(config('invitations.resource_route'))
+        return redirect(config('invitations.route'))
             ->with('success_message', 'Updated');
     }
 
@@ -315,7 +315,7 @@ class InvitationsController extends Controller
         $invitation = Invitation::findOrFail($id);
         $invitation->delete();
 
-        return redirect()->to(config('invitations.resource_route'))->with('success_message', $invitation->email . ' was deleted.');
+        return redirect()->to(config('invitations.route'))->with('success_message', $invitation->email . ' was deleted.');
 
     }
 
@@ -331,7 +331,7 @@ class InvitationsController extends Controller
                                 $invitation->save();
                             }));
 
-        return redirect(config('invitations.resource_route'))
+        return redirect(config('invitations.route'))
             ->with('success_message', 'Invitation was resent successfully.');
     }
 
