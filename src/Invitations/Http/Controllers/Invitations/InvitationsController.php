@@ -141,7 +141,7 @@ class InvitationsController extends Controller
 
         } else {
 
-            $invitations = $invitations        
+           return $invitations = $invitations        
                 ->select('invitations.*')
                 ->orderBy('invitations.email', $order)
                 ->paginate(20);
@@ -154,9 +154,11 @@ class InvitationsController extends Controller
         $data['order'] = $order;
         $data['items'] = $invitations;
         $data['resource_route'] = config('invitations.resource_route');
+        $data['create_button'] = config('invitations.display.create.create_button');
         $data['columns'] = $this->getIndexViewColumns();
 
-        return view('invitations::index', compact('invitations','search','sort_by','order'));
+        return view('invitations::index')
+            ->with($data);
     }
 
     /**

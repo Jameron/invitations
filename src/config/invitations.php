@@ -30,6 +30,13 @@ return [
             'icon' => 'search',
             'route' => '/invitations/search'
         ],
+        'create' => [
+            'enabled' => true,
+            'create_button' => [
+                'text'  => 'Create Invitation',
+                'route' => '/invitations/create'
+            ],
+        ]
     ],
 	'resource_route' => '/invitations'
 ];

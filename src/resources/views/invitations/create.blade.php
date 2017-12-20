@@ -11,7 +11,7 @@
                     <h5 class="card-title"></h5>
                     <p class="card-text"></p>
                     @include('admin::partials.utils._success')
-                    <form action="{{ config('invitations.route') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ config('invitations.resource_route') }}" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @include('invitations::partials.forms.invitation', ['submitButtonText' => 'Update', 'mode'=>'edit'])
                     </form>

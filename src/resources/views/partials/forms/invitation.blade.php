@@ -48,5 +48,5 @@
 @endif
 <p class="button-group">
     <button type="submit" class="btn btn-primary">Save</button>
-	<a href="{{ url(config('invitations.route')) }}" class="btn-alt">Cancel</a>
+	<a href="{{ url(config('invitations.resource_route')) }}" class="btn-alt">Cancel</a>
 </p>

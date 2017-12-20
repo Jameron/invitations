@@ -9,10 +9,15 @@
                 <div class="row">
                     <div class="col-md-9">
                         @include('partials._search', ['search'=> config('invitations.display.search') ])
-                        <p class="subtle float-right mt-2">Displaying {!! $items->firstItem() !!} - {!! $items->lastItem() !!} of  {!! $items->total() !!} total</p>
+                        <p class="subtle float-right mt-2">Displaying {!! ($items->firstItem()) ? $items->firstItem : '0' !!} - {!! ($items->lastItem()) ? $items->lastItem : '0' !!} of  {!! $items->total() !!} total</p>
                         @if(!empty($search_string))
                             <a href="{{ url($resource_route) }}">Clear Search</a>
                         @endif
+                    </div>
+                    <div class="col-md-3 text-right">
+                        @if(Gate::check('create_systems') || Gate::check('create_owned_systems'))
+                            @include('partials._create_button', ['button' => $create_button])
+                        @endcan
                     </div>
                 </div>
             @endif
