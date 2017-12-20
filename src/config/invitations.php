@@ -19,5 +19,17 @@ return [
            'installer' 
         ]
 	],
-	'route' => '/invitations'
+    'display' => [
+        'card-header' => 'Invitations',
+        'card-title' => '',
+        'card-subtitle' => '',
+        'search' => [
+            'show' => true,
+            'placeholder' => 'Search invitations',
+            'button_text' => 'Search',
+            'icon' => 'search',
+            'route' => '/invitations/search'
+        ],
+    ],
+	'resource_route' => '/invitations'
 ];

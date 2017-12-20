@@ -15,11 +15,51 @@ use Jameron\Invitations\Mail\Invitation as InvitationMail;
 
 class InvitationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public $columns;
+
+    public function getIndexViewColumns()
+    {
+        if(Auth::user()->roles()->first()->slug=='admin') {
+            $this->columns = collect([
+                [
+                    'column' => 'id',
+                    'label' => 'ID',
+                ],
+                [
+                    'column' => 'first_name',
+                    'label' => 'First Name'
+                ],
+                [
+                    'column' => 'last_name',
+                    'label' => 'Last name'
+                ],
+                [
+                    'column' => 'email',
+                    'label' => 'Email',
+                ],
+                [
+                    'column' => 'related_model',
+                    'label' => 'Related Model',
+                    'link'=>[
+                        'id_column' => 'id',
+                        'resource_route'=>'users'
+                    ]
+                ],
+                [
+                    'column' => 'sent_at',
+                    'label' => 'Sent At'
+                ],
+                [
+                    'column' => 'status',
+                    'label' => 'Status'
+                ]
+            ]);
+        }
+
+        return $this->columns;
+    }
+
     public function index(Request $request)
     {
         $search = ($request->get('search')) ? $request->get('search') : null;
@@ -28,25 +68,37 @@ class InvitationsController extends Controller
 
         $invitations = Invitation::with('roles');
 
-        switch ($sort_by) {
+        if (! $search) {
+            switch ($sort_by) {
 
-        case 'name':
+            case 'first_name':
 
                 $invitations = $invitations        
                     ->select('invitations.*')
-                    ->orderBy('invitations.name', $order)
+                    ->orderBy('invitations.first_name', $order)
                     ->paginate(20);
 
-            break;
-        case 'email':
+                break;
+
+            case 'last_name':
+
+                $invitations = $invitations        
+                    ->select('invitations.*')
+                    ->orderBy('invitations.last_name', $order)
+                    ->paginate(20);
+
+                break;
+
+            case 'email':
 
                 $invitations = $invitations        
                     ->orderBy('invitations.email', $order)
                     ->select('invitations.*')
                     ->paginate(20);
 
-            break;
-        case 'role':
+                break;
+
+            case 'role':
 
                 $invitations = $invitations        
                     ->join('invitations_role_user', 'invitations_role_user.registration_key_id', '=', 'invitations.id')
@@ -55,24 +107,54 @@ class InvitationsController extends Controller
                     ->select('invitations.*')
                     ->paginate(20);
 
-            break;
-        case 'sent_on':
+                break;
+
+            case 'sent_on':
 
                 $invitations = $invitations        
                     ->select('invitations.*')
                     ->orderBy('invitations.sent_on', $order)
                     ->paginate(20);
 
-            break;
-        case 'status':
+                break;
+
+            case 'status':
 
                 $invitations = $invitations        
                     ->select('invitations.*')
                     ->orderBy('invitations.status', $order)
                     ->paginate(20);
 
-            break;
+                break;
+
+            }
+
+        } elseif ($search) {
+
+            $invitations = $invitations     
+                ->select('invitations.*')
+                ->where(function ($query) use ($search) {
+                    $query->where('email', 'LIKE', '%'.$search.'%')
+                        ->orWhere('last_name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('first_name', 'LIKE', '%'.$search.'%');
+                })->paginate(20);
+
+        } else {
+
+            $invitations = $invitations        
+                ->select('invitations.*')
+                ->orderBy('invitations.email', $order)
+                ->paginate(20);
+
         }
+
+        $data = [];
+        $data['search_string'] = $search;
+        $data['sort_by'] = $sort_by;
+        $data['order'] = $order;
+        $data['items'] = $invitations;
+        $data['resource_route'] = config('invitations.resource_route');
+        $data['columns'] = $this->getIndexViewColumns();
 
         return view('invitations::index', compact('invitations','search','sort_by','order'));
     }
