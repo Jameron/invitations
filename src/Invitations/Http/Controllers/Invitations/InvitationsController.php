@@ -20,43 +20,7 @@ class InvitationsController extends Controller
 
     public function getIndexViewColumns()
     {
-        if(Auth::user()->roles()->first()->slug=='admin') {
-            $this->columns = collect([
-                [
-                    'column' => 'id',
-                    'label' => 'ID',
-                ],
-                [
-                    'column' => 'first_name',
-                    'label' => 'First Name'
-                ],
-                [
-                    'column' => 'last_name',
-                    'label' => 'Last name'
-                ],
-                [
-                    'column' => 'email',
-                    'label' => 'Email',
-                ],
-                [
-                    'column' => 'related', 
-                    'label' => 'Related Model',
-                    'link'=>[
-                        'id_column' => config('invitations.related.id_column'),
-                        'resource_route'=> config('invitations.related.resource_route')
-                    ]
-                ],
-                [
-                    'column' => 'sent_at',
-                    'label' => 'Sent At'
-                ],
-                [
-                    'column' => 'status',
-                    'label' => 'Status'
-                ]
-            ]);
-        }
-
+        $this->columns = collect(config('invitations.roles')[Auth::user()->roles()->first()->slug]);
         return $this->columns;
     }
 

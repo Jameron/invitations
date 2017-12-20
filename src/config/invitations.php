@@ -1,24 +1,24 @@
 <?php
 
-return [
+$invitations = [
     'user' => [
-        'model' => \App\User::class,
+        'model' => \App\Models\User::class,
     ],
     'from' => 'noreply@example.com',
     'expires' => false,
     'related' => [
-        'active' => false,
-        'model' => \App\ExampleModel::class,
-        'resource_route' => '',
-        'title' => 'Example',
+        'active' => true,
+        'model' => \App\Models\Example::class,
+        'resource_route' => '/examples',
+        'title' => 'example',
         'id_column' => 'id',
         'value_column' => 'name',
-        'user_foreign_key' => 'user_id',
-        'owner_foreign_key' => null,
+        'user_foreign_key' => 'user_id', 
+        'owner_foreign_key' => 'example_creator_user_id',
         'restrict_roles' => [
-           'installer' 
+            'user' 
         ]
-	],
+    ],
     'display' => [
         'card-header' => 'Invitations',
         'card-title' => '',
@@ -38,5 +38,45 @@ return [
             ],
         ]
     ],
-	'resource_route' => '/invitations'
+    'resource_route' => '/invitations',
 ];
+
+$invitations['roles'] =
+    [
+        'admin' => [
+            [
+                'column' => 'id',
+                'label' => 'ID',
+            ],
+            [
+                'column' => 'first_name',
+                'label' => 'First Name'
+            ],
+            [
+                'column' => 'last_name',
+                'label' => 'Last name'
+            ],
+            [
+                'column' => 'email',
+                'label' => 'Email',
+            ],
+            [
+                'column' => 'related', 
+                'label' => 'Related Model',
+                'link'=>[
+                    'id_column' => $invitations['related']['id_column'],
+                    'resource_route'=>$invitations['related']['resource_route']
+                ]
+            ],
+            [
+                'column' => 'sent_at',
+                'label' => 'Sent At'
+            ],
+            [
+                'column' => 'status',
+                'label' => 'Status'
+            ]
+        ]
+    ];
+
+return $invitations;
