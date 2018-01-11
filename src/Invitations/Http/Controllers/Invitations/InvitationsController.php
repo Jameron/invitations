@@ -45,7 +45,7 @@ class InvitationsController extends Controller
 
         if ($sort_by!=='role') {
 
-            $roles = $roles
+            $invitations = $invitations
                 ->orderBy($sort_by, $order);
         } else {
 
@@ -71,6 +71,8 @@ class InvitationsController extends Controller
         $data['create_button'] = config('invitations.create.button');
         $data['resource_route'] = config('invitations.resource_route');
         $data['permissions'] = [
+            'create' => 'create_invitations',
+            'read' => 'read_invitations',
             'update' => 'update_invitations',
             'delete' => 'delete_invitations'
         ];
