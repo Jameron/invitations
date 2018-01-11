@@ -61,3 +61,9 @@ Your config would look like this:
 ```
 
 When the invitation is claimed the page associated to the invitation will be updated with the users id.
+
+7) Add to your database/seeds/DatabaseSeeder.php
+
+```php
+        $this->call(\Jameron\Import\database\seeds\InvitationsSeeder::class);
+```
