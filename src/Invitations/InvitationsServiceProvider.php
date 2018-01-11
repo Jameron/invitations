@@ -2,6 +2,7 @@
 namespace Jameron\Invitations;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory;
 
 class InvitationsServiceProvider extends ServiceProvider {
 
@@ -26,6 +27,7 @@ class InvitationsServiceProvider extends ServiceProvider {
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadViewsFrom(resource_path('views/vendor'), 'invitations');
+		$this->app->make(Factory::class)->load(__DIR__ . '/../database/factories');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->app->bind('Invitation', function()
