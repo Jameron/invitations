@@ -32,68 +32,7 @@ class InvitationsController extends Controller
 
         $invitations = Invitation::with('roles');
 
-        if (! $search) {
-            switch ($sort_by) {
-
-            case 'first_name':
-
-                $invitations = $invitations        
-                    ->select('invitations.*')
-                    ->orderBy('invitations.first_name', $order)
-                    ->paginate(20);
-
-                break;
-
-            case 'last_name':
-
-                $invitations = $invitations        
-                    ->select('invitations.*')
-                    ->orderBy('invitations.last_name', $order)
-                    ->paginate(20);
-
-                break;
-
-            case 'email':
-
-                $invitations = $invitations        
-                    ->orderBy('invitations.email', $order)
-                    ->select('invitations.*')
-                    ->paginate(20);
-
-                break;
-
-            case 'role':
-
-                $invitations = $invitations        
-                    ->join('invitations_role_user', 'invitations_role_user.registration_key_id', '=', 'invitations.id')
-                    ->join('regulator_roles', 'regulator_roles.id', '=', 'invitations_role_user.role_id')
-                    ->orderBy('regulator_roles.label', $order)
-                    ->select('invitations.*')
-                    ->paginate(20);
-
-                break;
-
-            case 'sent_on':
-
-                $invitations = $invitations        
-                    ->select('invitations.*')
-                    ->orderBy('invitations.sent_on', $order)
-                    ->paginate(20);
-
-                break;
-
-            case 'status':
-
-                $invitations = $invitations        
-                    ->select('invitations.*')
-                    ->orderBy('invitations.status', $order)
-                    ->paginate(20);
-
-                break;
-
-            }
-
-        } elseif ($search) {
+        if ($search) {
 
             $invitations = $invitations     
                 ->select('invitations.*')
@@ -101,24 +40,43 @@ class InvitationsController extends Controller
                     $query->where('email', 'LIKE', '%'.$search.'%')
                         ->orWhere('last_name', 'LIKE', '%'.$search.'%')
                         ->orWhere('first_name', 'LIKE', '%'.$search.'%');
-                })->paginate(20);
+                });
+        }
 
+        if ($sort_by!=='role') {
+
+            $roles = $roles
+                ->orderBy($sort_by, $order);
         } else {
 
             $invitations = $invitations        
-                ->select('invitations.*')
-                ->orderBy('invitations.email', $order)
-                ->paginate(20);
-
+                ->join('invitations_role_user', 'invitations_role_user.registration_key_id', '=', 'invitations.id')
+                ->join('regulator_roles', 'regulator_roles.id', '=', 'invitations_role_user.role_id')
+                ->orderBy('regulator_roles.label', $order)
+                ->select('invitations.*');
         }
 
+        $invitations = $invitations->paginate(config('admin.paginate.count'));
+
         $data = [];
-        $data['search_string'] = $search;
+        $data['search'] = [
+            'show' => config('invitations.index.search')['show'],
+            'placeholder' => 'Search invitations by email',
+            'button_text' => 'Search',
+			'icon' => 'search',
+            'route' => '/invitations/search',
+            'string' => $search
+        ];
+        
+        $data['create_button'] = config('invitations.create.button');
+        $data['resource_route'] = config('invitations.resource_route');
+        $data['permissions'] = [
+            'update' => 'update_invitations',
+            'delete' => 'delete_invitations'
+        ];
         $data['sort_by'] = $sort_by;
         $data['order'] = $order;
         $data['items'] = $invitations;
-        $data['resource_route'] = config('invitations.resource_route');
-        $data['create_button'] = config('invitations.display.create.create_button');
         $data['columns'] = $this->getIndexViewColumns();
 
         return view('invitations::index')

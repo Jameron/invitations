@@ -30,13 +30,27 @@ $invitations = [
             'icon' => 'search',
             'route' => '/invitations/search'
         ],
-        'create' => [
-            'enabled' => true,
-            'create_button' => [
-                'text'  => 'Create Invitation',
-                'route' => '/invitations/create'
-            ],
-        ]
+    ],
+    'create' => [
+        'enabled' => true,
+        'button' => [
+            'text'  => 'Create Invitation',
+            'route' => '/invitations/create'
+        ],
+    ],
+    'index' => [
+        'card-header' => 'Invitations',
+        'card-title' => '',
+        'card-subtitle' => '',
+        'search' => [
+            'show' => true,
+            'placeholder' => 'Search invitations',
+            'button_text' => 'Search',
+            'icon' => 'search',
+            'route' => '/invitations/search',
+        ],
+        'online_status_identifier' => '<span class="online"></span>',
+        'offline_status_identifier' => '<span class="offline"></span>',
     ],
     'resource_route' => '/invitations',
 ];
