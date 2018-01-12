@@ -21,7 +21,7 @@ class InvitationsController extends Controller
     public function getIndexViewColumns()
     {
         if(isset(config('invitations.roles')[Auth::user()->roles()->first()->slug])) {
-            $this->columns = collect(config('invitations.roles')[Auth::user()->roles()->first()->slug]);
+            $this->columns = collect(config('invitations.roles')[Auth::user()->roles()->first()->slug]['columns']);
         }
         return $this->columns;
     }
@@ -105,7 +105,6 @@ class InvitationsController extends Controller
 
         $roles = Role::all();
 
-        $data['roles'] = $roles;
 
         if(Config::get('invitations.related')) {
             $invitables = resolve('App\Invitable');
@@ -118,7 +117,19 @@ class InvitationsController extends Controller
             }
             $invitables = $invitables->pluck(Config::get('invitations.related.value_column'), Config::get('invitations.related.id_column'));
             $data['invitables'] = $invitables;
+        } 
+
+        $invitable_roles = [];
+
+        if(isset(config('invitations.roles')[Auth::user()->roles()->first()->slug])) {
+            $invitable_roles = config('invitations.roles')[Auth::user()->roles()->first()->slug]['invitable_roles'];
         }
+
+        $roles = $roles->filter(function($role) use ($invitable_roles) {
+            return in_array($role->slug, $invitable_roles);
+        })->values();
+
+        $data['roles'] = $roles;
 
         return view('invitations::create')
             ->with($data);

@@ -84,37 +84,40 @@ $invitations = [
 $invitations['roles'] =
     [
         'admin' => [
-            [
-                'column' => 'id',
-                'label' => 'ID',
-            ],
-            [
-                'column' => 'first_name',
-                'label' => 'First Name'
-            ],
-            [
-                'column' => 'last_name',
-                'label' => 'Last name'
-            ],
-            [
-                'column' => 'email',
-                'label' => 'Email',
-            ],
-            [
-                'column' => 'related', 
-                'label' => 'Related Model',
-                'link'=>[
-                    'id_column' => $invitations['related']['id_column'],
-                    'resource_route'=>$invitations['related']['resource_route']
+            'invitable_roles' => ['admin'],
+            'columns' => [
+                [
+                    'column' => 'id',
+                    'label' => 'ID',
+                ],
+                [
+                    'column' => 'first_name',
+                    'label' => 'First Name'
+                ],
+                [
+                    'column' => 'last_name',
+                    'label' => 'Last name'
+                ],
+                [
+                    'column' => 'email',
+                    'label' => 'Email',
+                ],
+                [
+                    'column' => 'related', 
+                    'label' => 'Related Model',
+                    'link'=>[
+                        'id_column' => $invitations['related']['id_column'],
+                        'resource_route'=>$invitations['related']['resource_route']
+                    ]
+                ],
+                [
+                    'column' => 'sent_at',
+                    'label' => 'Sent At'
+                ],
+                [
+                    'column' => 'status',
+                    'label' => 'Status'
                 ]
-            ],
-            [
-                'column' => 'sent_at',
-                'label' => 'Sent At'
-            ],
-            [
-                'column' => 'status',
-                'label' => 'Status'
             ]
         ]
     ];
