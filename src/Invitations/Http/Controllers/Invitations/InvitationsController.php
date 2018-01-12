@@ -16,16 +16,25 @@ use Jameron\Invitations\Mail\Invitation as InvitationMail;
 class InvitationsController extends Controller
 {
 
-    public $columns;
+    public $columns = [];
 
     public function getIndexViewColumns()
     {
-        $this->columns = collect(config('invitations.roles')[Auth::user()->roles()->first()->slug]);
+        if(isset(config('invitations.roles')[Auth::user()->roles()->first()->slug])) {
+            $this->columns = collect(config('invitations.roles')[Auth::user()->roles()->first()->slug]);
+        }
         return $this->columns;
     }
 
     public function index(Request $request)
     {
+
+        $read_invitations_permissions = config('invitations.permissions.read.slug');
+
+        if(!Auth::user()->can($read_invitations_permissions)) {
+            return view('errors.403');
+        }
+
         $search = ($request->get('search')) ? $request->get('search') : null;
         $sort_by = ($request->get('sortBy')) ? $request->get('sortBy') : 'email';
         $order = ($request->get('order')) ? $request->get('order') : 'ASC';

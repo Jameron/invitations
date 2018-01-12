@@ -53,6 +53,32 @@ $invitations = [
         'offline_status_identifier' => '<span class="offline"></span>',
     ],
     'resource_route' => '/invitations',
+    'invitable_roles' => [
+        [
+            'role' => 'admin',
+            'can_invite_new' => [
+                'admin', 
+            ],
+        ]
+    ],
+    'permissions' => [
+        'create'=>[
+            'slug' => 'create_invitations',
+            'roles' => ['admin'],
+        ],
+        'read'=>[
+            'slug'=>'read_invitations',
+            'roles' => ['admin']
+        ],
+        'update'=>[
+            'slug'=>'update_permissions',
+            'roles' => ['admin']
+        ],
+        'delete'=>[
+            'slug'=>'delete_permissions',
+            'roles' => ['admin']
+        ]
+    ],
 ];
 
 $invitations['roles'] =
