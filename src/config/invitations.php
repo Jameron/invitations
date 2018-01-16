@@ -34,6 +34,7 @@ $invitations = [
     'create' => [
         'enabled' => true,
         'button' => [
+            'show' => true,
             'text'  => 'Create Invitation',
             'route' => '/invitations/create'
         ],
